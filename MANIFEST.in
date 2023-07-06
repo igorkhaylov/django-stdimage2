@@ -1,5 +1,5 @@
-include stdimage/locale/*/LC_MESSAGES/django.po
-include stdimage/locale/*/LC_MESSAGES/django.mo
+include stdimage2/locale/*/LC_MESSAGES/django.po
+include stdimage2/locale/*/LC_MESSAGES/django.mo
 prune tests
 prune .github
 exclude .*

@@ -3,7 +3,7 @@ import os
 import pytest
 from PIL.Image import Resampling
 
-from stdimage.utils import render_variations
+from stdimage2.utils import render_variations
 from tests.models import ManualVariationsModel
 from tests.test_models import IMG_DIR
 

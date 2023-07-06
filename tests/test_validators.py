@@ -1,4 +1,4 @@
-from stdimage import validators
+from stdimage2 import validators
 
 
 class TestBaseSizeValidator:

@@ -23,7 +23,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
       - run: python -m pip install -r lint-requirements.txt
-      - run: msgcheck -n stdimage/locale/*/LC_MESSAGES/*.po
+      - run: msgcheck -n stdimage2/locale/*/LC_MESSAGES/*.po
 
   lint:
     strategy:

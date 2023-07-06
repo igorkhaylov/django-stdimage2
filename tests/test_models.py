@@ -10,7 +10,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.db.models.fields.files import ImageFieldFile
 from PIL import Image
 
-from stdimage.models import StdImageFieldFile
+from stdimage2.models import StdImageFieldFile
 
 from . import models
 from .models import (

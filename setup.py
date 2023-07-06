@@ -23,7 +23,7 @@ class compile_translations(Command):
         self.set_undefined_options("build", ("build_lib", "build_lib"))
 
     def run(self):
-        pattern = "stdimage/locale/*/LC_MESSAGES/django.po"
+        pattern = "stdimage2/locale/*/LC_MESSAGES/django.po"
         for file in glob.glob(pattern):
             name, ext = os.path.splitext(file)
             cmd = ["msgfmt", "-c", "-o", f"{self.build_lib}/{name}.mo", file]
@@ -48,7 +48,7 @@ class install(_install):
 
 
 setup(
-    name="django-stdimage",
+    name="django-stdimage2",
     use_scm_version=True,
     cmdclass={
         "build": build,

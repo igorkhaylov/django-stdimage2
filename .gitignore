@@ -1,6 +1,6 @@
 *.pyc
 *.mo
-django_stdimage.egg-info
+django_stdimage2.egg-info
 build/
 dist/
 .idea/
