@@ -5,10 +5,10 @@ from django.core.files.storage import FileSystemStorage
 from django.db import models
 from PIL import Image
 
-from stdimage import JPEGField, StdImageField
-from stdimage.models import StdImageFieldFile
-from stdimage.utils import render_variations
-from stdimage.validators import MaxSizeValidator, MinSizeValidator
+from stdimage2 import JPEGField, StdImageField
+from stdimage2.models import StdImageFieldFile
+from stdimage2.utils import render_variations
+from stdimage2.validators import MaxSizeValidator, MinSizeValidator
 
 upload_to = "img/"
 

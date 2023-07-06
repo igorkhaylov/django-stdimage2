@@ -20,9 +20,9 @@ logger = logging.getLogger()
 
 
 warnings.warn(
-    "The django-stdimage is deprecated in favor of django-pictures.\n"
+    "The django-stdimage2 is deprecated in favor of django-pictures.\n"
     "Migration instructions are available in the README:\n"
-    "https://github.com/codingjoe/django-stdimage#migration-instructions",
+    "https://github.com/codingjoe/django-stdimage2#migration-instructions",
     DeprecationWarning,
 )
 

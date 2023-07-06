@@ -2,7 +2,7 @@ from django.apps import apps
 from django.core.files.storage import get_storage_class
 from django.core.management import BaseCommand, CommandError
 
-from stdimage.utils import render_variations
+from stdimage2.utils import render_variations
 
 
 class Command(BaseCommand):

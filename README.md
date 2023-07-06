@@ -1,89 +1,8 @@
-[![version](https://img.shields.io/pypi/v/django-stdimage.svg)](https://pypi.python.org/pypi/django-stdimage/)
-[![codecov](https://codecov.io/gh/codingjoe/django-stdimage/branch/master/graph/badge.svg)](https://codecov.io/gh/codingjoe/django-stdimage)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+<!-- [![version](https://img.shields.io/pypi/v/django-stdimage2.svg)](https://pypi.python.org/pypi/django-stdimage/) -->
+<!-- [![codecov](https://codecov.io/gh/codingjoe/django-stdimage2/branch/master/graph/badge.svg)](https://codecov.io/gh/codingjoe/django-stdimage) -->
+<!-- [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) -->
 
-# Django Standardized Image Field
-
-This package has been deprecated in favor of [django-pictures][django-pictures].
-
-## Migration Instructions
-
-First, make sure you understand the differences between the two packages and
-how to serve images in a modern web application via the [picture][picture-tag]-Element.
-
-Next, follow the setup instructions for [django-pictures][django-pictures].
-
-Once you are set up, change your models to use the new `PictureField` and provide the
- `aspect_ratios` you'd like to serve. Do create migrations just yet.
-
-This step should be followed by changing your templates and frontend.
-The new placeholders feature for local development should help you
-to do this almost effortlessly.
-
-Finally, run `makemigrations` and replace the `AlterField` operation with
-`AlterPictureField`.
-
-We highly recommend to use Django's `image_width` and `image_height` fields, to avoid
-unnecessary IO. If you can add these fields to your model, you can use the following
-snippet to populate them:
-
-```python
-import django.core.files.storage
-from django.db import migrations, models
-import pictures.models
-from pictures.migrations import AlterPictureField
-
-def forward(apps, schema_editor):
-    for obj in apps.get_model("my-app.MyModel").objects.all().iterator():
-        obj.image_width = obj.logo.width
-        obj.image_height = obj.logo.height
-        obj.save(update_fields=["image_height", "image_width"])
-
-def backward(apps, schema_editor):
-    apps.get_model("my-app.MyModel").objects.all().update(
-        image_width=None,
-        image_height=None,
-    )
-
-class Migration(migrations.Migration):
-    dependencies = [
-        ('my-app', '0001_initial'),
-    ]
-
-    operations = [
-        migrations.AddField(
-            model_name="mymodel",
-            name="image_height",
-            field=models.PositiveIntegerField(editable=False, null=True),
-        ),
-        migrations.AddField(
-            model_name="mymodel",
-            name="image_width",
-            field=models.PositiveIntegerField(editable=False, null=True),
-        ),
-        migrations.RunPython(forward, backward),
-        AlterPictureField(
-            model_name="mymodel",
-            name="image",
-            field=pictures.models.PictureField(
-                aspect_ratios=["3/2", "3/1"],
-                breakpoints={"desktop": 1024, "mobile": 576},
-                container_width=1200,
-                file_types=["WEBP"],
-                grid_columns=12,
-                height_field="image_height",
-                pixel_densities=[1, 2],
-                storage=django.core.files.storage.FileSystemStorage(),
-                upload_to="pictures/",
-                verbose_name="image",
-                width_field="image_width",
-            ),
-        ),
-    ]
-```
-
-[django-pictures]: https://github.com/codingjoe/django-pictures
-[picture-tag]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture
+# Django Standardized Image Field 2
 
 ## Why would I want this?
 
@@ -109,13 +28,15 @@ Django Standardized Image Field implements the following features:
 
 Simply install the latest stable package using the following command:
 
-```bash
-pip install django-stdimage
+<!-- ```bash
+pip install django-stdimage2
 # or
-pipenv install django-stdimage
+pipenv install django-stdimage2
+``` -->
+``` bash
+pip install git+https://github.com/igorkhaylov/django-stdimage2.git
 ```
-
-and add `'stdimage'` to `INSTALLED_APP`s in your settings.py, that's it!
+and add `'stdimage2'` to `INSTALLED_APP`s in your settings.py, that's it!
 
 ## Usage
 
@@ -137,7 +58,7 @@ Example:
 
 ```python
 from django.db import models
-from stdimage import StdImageField, JPEGField
+from stdimage2 import StdImageField, JPEGField
 
 
 class MyModel(models.Model):
@@ -188,7 +109,7 @@ Example
 
 ```python
 from django.db import models
-from stdimage import StdImageField
+from stdimage2 import StdImageField
 from dynamic_filenames import FilePattern
 
 upload_to_pattern = FilePattern(
@@ -211,8 +132,8 @@ Example
 
 ```python
 from django.db import models
-from stdimage.validators import MinSizeValidator, MaxSizeValidator
-from stdimage.models import StdImageField
+from stdimage2.validators import MinSizeValidator, MaxSizeValidator
+from stdimage2.models import StdImageField
 
 
 class MyClass(models.Model):
@@ -237,7 +158,7 @@ yourself.
 
 ```python
 from django.db import models
-from stdimage.models import StdImageField
+from stdimage2.models import StdImageField
 
 
 class MyModel(models.Model):
@@ -251,7 +172,7 @@ class MyModel(models.Model):
 
 ### Async image processing
 Tools like celery allow to execute time-consuming tasks outside of the request. If you don't want
-to wait for your variations to be rendered in request, StdImage provides you the option to pass an
+to wait for your variations to be rendered in request, StdImage2 provides you the option to pass an
 async keyword and a 'render_variations' function that triggers the async task.
 Note that the callback is not transaction save, but the file variations will be present.
 The example below is based on celery.
@@ -262,7 +183,7 @@ from django.apps import apps
 
 from celery import shared_task
 
-from stdimage.utils import render_variations
+from stdimage2.utils import render_variations
 
 
 @shared_task
@@ -276,7 +197,7 @@ def process_photo_image(file_name, variations, storage):
 `models.py`:
 ```python
 from django.db import models
-from stdimage.models import StdImageField
+from stdimage2.models import StdImageField
 
 from .tasks import process_photo_image
 
@@ -297,7 +218,7 @@ class AsyncImageModel(models.Model):
 You might have added or changed variations to an existing field. That means you will need to render new variations.
 This can be accomplished using a management command.
 ```bash
-python manage.py rendervariations 'app_name.model_name.field_name' [--replace] [-i/--ignore-missing]
+python manage.py rendervariations2 'app_name.model_name.field_name' [--replace] [-i/--ignore-missing]
 ```
 The `replace` option will replace all existing files.
 The `ignore-missing` option will suspend 'missing source file' errors and keep
