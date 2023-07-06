@@ -128,7 +128,7 @@ class StdImageFieldFile(ImageFieldFile):
                 image = ImageOps.fit(image, size, method=resample)
             else:
                 image.thumbnail(size, resample=resample)
-
+        image = ImageOps.exif_transpose(image)
         return image, save_kargs
 
     @classmethod
