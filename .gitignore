@@ -1,0 +1,15 @@
+*.pyc
+*.mo
+django_stdimage.egg-info
+build/
+dist/
+.idea/
+.tox/
+coverage.xml
+
+
+.cache/
+.coverage
+htmlcov/
+
+.eggs/
