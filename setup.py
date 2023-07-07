@@ -24,6 +24,7 @@ class compile_translations(Command):
 
     def run(self):
         pattern = "stdimage2/locale/*/LC_MESSAGES/django.po"
+        # subprocess.call(f'sudo apt install gettext aspell')
         for file in glob.glob(pattern):
             name, ext = os.path.splitext(file)
             cmd = ["msgfmt", "-c", "-o", f"{self.build_lib}/{name}.mo", file]
@@ -50,6 +51,7 @@ class install(_install):
 setup(
     name="django-stdimage2",
     use_scm_version=True,
+    # version='0.1.13',
     cmdclass={
         "build": build,
         "install": install,
