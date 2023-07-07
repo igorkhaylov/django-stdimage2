@@ -46,10 +46,11 @@ class install(_install):
         ("compile_translations", None),
     ]
 
+version = '0.1.4'
 
 setup(
+    version=version,
     name="django-stdimage2",
-    use_scm_version=True,
     cmdclass={
         "build": build,
         "install": install,
