@@ -53,6 +53,6 @@ setup(
     cmdclass={
         "build": build,
         "install": install,
-        #"compile_translations": compile_translations,
+        "compile_translations": compile_translations,
     },
 )
